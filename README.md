@@ -21,24 +21,33 @@ RegisterNumber: 23013434
 '''
 ```
 import numpy as np
+import matplotlib.pyplot as plt
 
-def linear_regression(x, y):
-    x_mean = np.mean(x)
-    y_mean = np.mean(y)
-    numerator = np.sum((x - x_mean) * (y - y_mean))
-    denominator = np.sum((x - x_mean) ** 2)
-    beta = numerator / denominator
-    alpha = y_mean - beta * x_mean
-    return alpha, beta
+X = np.array(eval(input()))
+Y = np.array(eval(input()))
 
-# Example usage
-x = np.array([1, 2, 3, 4, 5])
-y = np.array([2, 4, 5, 4, 5])
-alpha, beta = linear_regression(x, y)
-print(f"The equation of the regression line is: y = {beta:.2f}x + {alpha:.2f}")
+Xmean = np.mean(X)
+Ymean = np.mean(Y)
+num,den = 0,0
+for i in range(len(X)):
+    num += (X[i]-Xmean)*(Y[i]-Ymean)
+    den += (X[i]-Xmean)**2
+m = num/den
+c = Ymean-m*Xmean
+    
+print (m, c)
+
+Y_pred = m*X + c
+print (Y_pred)
+
+plt.scatter(X,Y)
+plt.plot(X,Y_pred,color="red")
+plt.show()
+
 ```
 ## Output
-![output](./univariable.png)
+![output](image-1.png)
+![output](image-2.png)
 
 ## Result
 Thus the univariate Linear Regression was implemented to fit a straight line using least squares.
